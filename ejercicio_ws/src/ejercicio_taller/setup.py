@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'test_GPIO = ejercicio_taller.test_GPIO:main',
+            'NodoRPi = ejercicio_taller.NodoRPi:main',
             'template_node = ejercicio_taller.template_node:main'
         ],
     },
