@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
-from example_interfaces.msg import Int32, Float32, Bool
+from std_msgs.msg import Int32, Float32, Bool
 
 
 class NodeName(Node):
