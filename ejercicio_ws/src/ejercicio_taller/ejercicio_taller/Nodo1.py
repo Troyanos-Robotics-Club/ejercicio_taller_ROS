@@ -2,7 +2,7 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
-from std_msgs.msg import Int32, Float32, Bool, String
+from std_msgs.msg import String
 
 
 class NodeName(Node):
@@ -17,28 +17,20 @@ class NodeName(Node):
         )
 
         # Create Publishers
-        self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",qos_profile)
-        self.publisher_boton = self.create_publisher(Bool, "/estado_boton",qos_profile)
+        self.test_publisher = self.create_publisher(String,"/topic_test",qos_profile)
 
         # Create Subscribers
-        self.subscriber_LED = self.create_subscription(Bool,"/estado_LED",self.callback_sub_LED,qos_profile)
-        self.subscriber_servo = self.create_subscription(Int32,"/pwm_servo", self.callback_sub_servo,qos_profile)
 
-        self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,qos_profile)
         # Initialize attributes
 
         # Create timers
+        self.timer1 = self.create_timer(1,self.callback_timer)
 
     # Create callback methods (subscribers and timers)
-    def callback_sub_LED(self):
-        pass
-
-    def callback_sub_servo(self):
-        pass
-
-    def callback_sub_test(self,msg):
-        self.get_logger().info(msg.data)
-    
+    def callback_timer(self):
+        msg = String()
+        msg.data = "nice"
+        self.test_publisher.publish(msg)
 
 def main(args=None) -> None:
     rclpy.init(args=args)

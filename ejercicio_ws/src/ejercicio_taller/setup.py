@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'NodoRPi = ejercicio_taller.NodoRPi:main',
-            'template_node = ejercicio_taller.template_node:main'
+            'template_node = ejercicio_taller.template_node:main',
+            "Nodo1 = ejercicio_taller.Nodo1:main"
         ],
     },
 )
