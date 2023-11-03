@@ -22,4 +22,5 @@ Recibirá la info del botón, mandará la señal en un On-Set (de 0 a 1 lógico)
 subscriber_boton: recibe el estado del botón, tipo Bool de std_msgs en el topic /estado_boton
 publisher_servo: manda el DC del PWM al servo, de tipo Int32 de std_msgs en topuc /pwm_servo
 
-# Pasos para instalar el repositorio
+Nota: tanto Nodo 1 como Nodo 2 serán realiazdos en las VM de los participantes comunicándose con un único nodo en la RPi a través de ROS.
+# Pasos para ejecutar el ejercicio en la RPi
