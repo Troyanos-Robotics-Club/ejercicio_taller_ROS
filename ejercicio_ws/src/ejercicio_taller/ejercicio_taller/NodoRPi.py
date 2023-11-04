@@ -56,10 +56,10 @@ class NodoRPi(Node):
 
 def main(args=None) -> None:
     rclpy.init(args=args)
-    NodoRPi= NodoRPi()
-    rclpy.spin(NodoRPi)
+    nodo = NodoRPi()
+    rclpy.spin(nodo)
     GPIO.cleanup()
-    NodoRPi.destroy_node()
+    nodo.destroy_node()
     rclpy.shutdown()
 
 if __name__=='__main__':
