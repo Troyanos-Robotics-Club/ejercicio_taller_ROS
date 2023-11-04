@@ -34,7 +34,7 @@ class NodeName(Node):
     # Create callback methods (subscribers and timers)
     def callback_sub_LED(self, msg):
         self.estado_LED = msg.data
-        GPIO.output(7,self.estado_LED)
+        GPIO.output(11,self.estado_LED)
 
     def callback_sub_servo(self, msg):
         pass
@@ -44,7 +44,8 @@ class NodeName(Node):
 
     # send info to actuators
     def main_timer_callback(self):
-        GPIO.output(7,self.estado_LED)
+        self.estado_LED = not(self.estado_LED)
+        GPIO.output(11,self.estado_LED)
 
     
 
