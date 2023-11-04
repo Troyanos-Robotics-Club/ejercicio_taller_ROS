@@ -29,7 +29,7 @@ class NodeName(Node):
         GPIO.setup(13,GPIO.OUT) #PWM al servo 
 
         # Create timers
-        self.main_timer = self.create_timer(0.01, self.main_timer_callback)
+        self.main_timer = self.create_timer(0,5, self.main_timer_callback)
 
     # Create callback methods (subscribers and timers)
     def callback_sub_LED(self, msg):
