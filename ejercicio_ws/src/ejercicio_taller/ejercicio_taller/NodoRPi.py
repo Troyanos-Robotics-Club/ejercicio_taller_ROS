@@ -47,7 +47,7 @@ class NodeName(Node):
         self.get_logger().info(msg.data)
 
     def main_timer_callback(self): #publicar info de los sensores 
-        if (GPIO.INPUT(15)):
+        if (GPIO.input(15)):
             self.get_logger().info("presionado")
         else:
             self.get_logger().info("no presionado")
