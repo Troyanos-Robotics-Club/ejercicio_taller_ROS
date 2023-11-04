@@ -12,7 +12,7 @@ class NodoRPi(Node):
         GPIO.setup(11,GPIO.OUT) #LED
         GPIO.setup(13,GPIO.OUT) #PWM al servo 
         GPIO.setup(37,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #Boton
-        GPIO.add_event_detect(37,GPIO.RISING, callback=self.callback_boton)
+        GPIO.add_event_detect(37,GPIO.RISING, callback=callback_boton)
 
         # Create Publishers
         self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",10)
@@ -50,10 +50,9 @@ class NodoRPi(Node):
     def main_timer_callback(self): #publicar info de los sensores 
         pass
 
-    def callback_boton(self, channel):
-        self.get_logger().info("lo presiono")
+def callback_boton(channel):
+    get_logger().info("lo presiono")
         
-
 def main(args=None) -> None:
     rclpy.init(args=args)
     nodo = NodoRPi()
