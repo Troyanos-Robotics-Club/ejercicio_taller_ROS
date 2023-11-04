@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
-from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from std_msgs.msg import Int32, Float32, Bool, String
 
 class NodeName(Node):
@@ -17,25 +16,36 @@ class NodeName(Node):
         self.subscriber_servo = self.create_subscription(Int32,"/pwm_servo", self.callback_sub_servo,10)
 
         self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,10)
-        
+
         # Initialize attributes
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(7,GPIO.OUT)
         self.estado_LED = True
         self.distancia_sensor = 0.0
         self.estado_boton = False
         self.pwm_servo = 0
+
+        # pins setup
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(11,GPIO.OUT) #LED
+        GPIO.setup(13,GPIO.OUT) #PWM al servo 
+
         # Create timers
+        self.main_timer = self.create_timer(0.01, self.main_timer_callback)
 
     # Create callback methods (subscribers and timers)
-    def callback_sub_LED(self):
-        pass
+    def callback_sub_LED(self, msg):
+        self.estado_LED = msg.data
+        GPIO.output(7,self.estado_LED)
 
-    def callback_sub_servo(self):
+    def callback_sub_servo(self, msg):
         pass
 
     def callback_sub_test(self,msg):
         self.get_logger().info(msg.data)
+
+    # send info to actuators
+    def main_timer_callback(self):
+        GPIO.output(7,self.estado_LED)
+
     
 
 def main(args=None) -> None:
