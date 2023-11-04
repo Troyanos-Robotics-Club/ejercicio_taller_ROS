@@ -9,22 +9,15 @@ class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('node_name')
 
-        qos_profile = QoSProfile(
-            reliability = ReliabilityPolicy.BEST_EFFORT,
-            durability = DurabilityPolicy.TRANSIENT_LOCAL,
-            history = HistoryPolicy.KEEP_LAST,
-            depth = 1
-        )
-
         # Create Publishers
-        self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",qos_profile)
-        self.publisher_boton = self.create_publisher(Bool, "/estado_boton",qos_profile)
+        self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",10)
+        self.publisher_boton = self.create_publisher(Bool, "/estado_boton",10)
 
         # Create Subscribers
-        self.subscriber_LED = self.create_subscription(Bool,"/estado_LED",self.callback_sub_LED,qos_profile)
-        self.subscriber_servo = self.create_subscription(Int32,"/pwm_servo", self.callback_sub_servo,qos_profile)
+        self.subscriber_LED = self.create_subscription(Bool,"/estado_LED",self.callback_sub_LED,10)
+        self.subscriber_servo = self.create_subscription(Int32,"/pwm_servo", self.callback_sub_servo,10)
 
-        self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,qos_profile)
+        self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,10)
         # Initialize attributes
 
         # Create timers
