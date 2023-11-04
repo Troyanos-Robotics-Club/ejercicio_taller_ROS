@@ -54,7 +54,7 @@ class NodeName(Node):
         GPIO.output(11,self.estado_LED)
         # servo
         self.i += 1
-        if (self.i == 3): i = 0
+        if (self.i == 3): self.i = 0
         self.pwm_servo = self.pwms[self.i]
         self.servo.ChangeDutyCycle(self.pwm_servo)
         
