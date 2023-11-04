@@ -12,6 +12,7 @@ class NodeName(Node):
         GPIO.setup(11,GPIO.OUT) #LED
         GPIO.setup(13,GPIO.OUT) #PWM al servo 
         GPIO.setup(15,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #Boton
+        GPIO.add_event_detect(15,GPIO.RISING, callback=self.callback_boton)
 
         # Create Publishers
         self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",10)
@@ -46,11 +47,12 @@ class NodeName(Node):
     def callback_sub_test(self,msg):
         self.get_logger().info(msg.data)
 
+
     def main_timer_callback(self): #publicar info de los sensores 
-        if (GPIO.input(15)):
-            self.get_logger().info("presionado")
-        else:
-            self.get_logger().info("no presionado")
+        pass
+
+    def callback_boton(self):
+        self.get_logger().info("lo presiono")
         
 
 def main(args=None) -> None:
