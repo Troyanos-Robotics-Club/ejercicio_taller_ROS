@@ -19,6 +19,8 @@ class NodeName(Node):
         self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,10)
         
         # Initialize attributes
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(7,GPIO.OUT)
         self.estado_LED = True
         self.distancia_sensor = 0.0
         self.estado_boton = False
