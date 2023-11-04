@@ -47,7 +47,6 @@ class NodeName(Node):
     def callback_sub_test(self,msg):
         self.get_logger().info(msg.data)
 
-
     def main_timer_callback(self): #publicar info de los sensores 
         pass
 
