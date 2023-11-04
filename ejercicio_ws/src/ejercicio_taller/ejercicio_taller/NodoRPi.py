@@ -29,7 +29,7 @@ class NodeName(Node):
         GPIO.setup(13,GPIO.OUT) #PWM al servo 
         self.servo = GPIO.PWM(13,100)
         self.servo.start(100)
-        self.servo.ChangeDutyCycle(50)
+        self.servo.ChangeDutyCycle(10)
 
         # Create timers
         self.main_timer = self.create_timer(0.5, self.main_timer_callback)
