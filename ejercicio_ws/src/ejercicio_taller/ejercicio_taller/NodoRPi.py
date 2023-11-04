@@ -3,16 +3,16 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32, Bool, String
 
-class NodeName(Node):
+class NodoRPi(Node):
     def __init__(self) -> None:
-        super().__init__('node_name')
+        super().__init__('NodoRPi')
 
         # pins setup
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11,GPIO.OUT) #LED
         GPIO.setup(13,GPIO.OUT) #PWM al servo 
-        GPIO.setup(15,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #Boton
-        GPIO.add_event_detect(15,GPIO.RISING, callback=self.callback_boton)
+        GPIO.setup(37,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #Boton
+        GPIO.add_event_detect(37,GPIO.RISING, callback=self.callback_boton)
 
         # Create Publishers
         self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",10)
@@ -50,16 +50,16 @@ class NodeName(Node):
     def main_timer_callback(self): #publicar info de los sensores 
         pass
 
-    def callback_boton(self):
+    def callback_boton(self, channel):
         self.get_logger().info("lo presiono")
         
 
 def main(args=None) -> None:
     rclpy.init(args=args)
-    node_name= NodeName()
-    rclpy.spin(node_name)
+    NodoRPi= NodoRPi()
+    rclpy.spin(NodoRPi)
     GPIO.cleanup()
-    node_name.destroy_node()
+    NodoRPi.destroy_node()
     rclpy.shutdown()
 
 if __name__=='__main__':
