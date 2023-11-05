@@ -18,7 +18,7 @@ class NodoRPi(Node):
 
         # Create Publishers
         self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",10)
-        self.publisher_boton = self.create_publisher(Bool, "/estado_boton",10)
+        self.publisher_boton = self.create_publisher(Bool, "/estado_boton",1)
 
         # Create Subscribers
         self.subscriber_LED = self.create_subscription(Bool,"/estado_LED",self.callback_sub_LED,10)

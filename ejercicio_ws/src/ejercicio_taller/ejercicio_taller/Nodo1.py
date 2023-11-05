@@ -12,7 +12,7 @@ class NodeName(Node):
         self.publisher_servo = self.create_publisher(String,"/pwm_servo",10)
 
         # Create Subscribers
-        self.subscriber_boton = self.create_subscription(Bool,"/estado_boton",self.callback_boton,10)
+        self.subscriber_boton = self.create_subscription(Bool,"/estado_boton",self.callback_boton,1)
 
         # Inicializar servo
         inicio = String()
