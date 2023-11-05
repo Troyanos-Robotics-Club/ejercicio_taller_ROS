@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'NodoRPi = ejercicio_taller.NodoRPi:main',
             'template_node = ejercicio_taller.template_node:main',
-            "Nodo1 = ejercicio_taller.Nodo1:main"
+            "Nodo1 = ejercicio_taller.Nodo1:main",
+            "Nodo2 = ejercicio_taller.Nodo2:main"
         ],
     },
 )

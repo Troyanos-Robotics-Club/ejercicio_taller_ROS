@@ -4,9 +4,9 @@ from rclpy.node import Node
 from std_msgs.msg import Float32, Bool, String
 import time
 
-class NodeName(Node):
+class Nodo1(Node):
     def __init__(self) -> None:
-        super().__init__('node_name')
+        super().__init__('Nodo1')
 
         # Create Publishers
         self.publisher_servo = self.create_publisher(String,"/pwm_servo",10)
@@ -30,7 +30,7 @@ class NodeName(Node):
 
 def main(args=None) -> None:
     rclpy.init(args=args)
-    node_name= NodeName()
+    node_name= Nodo1()
     rclpy.spin(node_name)
     node_name.destroy_node()
     rclpy.shutdown()
