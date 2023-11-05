@@ -69,6 +69,8 @@ class NodoRPi(Node):
         self.distancia_sensor = pulse_dur*34300/2
 
         self.get_logger().info(str(self.distancia_sensor))
+        self.estado_LED = not(self.estado_LED)
+        GPIO.output(11,self.estado_LED)
 
 def main(args=None) -> None:
     rclpy.init(args=args)
