@@ -52,14 +52,17 @@ class NodoRPi(Node):
 
     def main_timer_callback(self): #publicar info de los sensores 
         # Manejo del boton
+        msg = Bool()
+        msg.data = True
         self.estado_boton = GPIO.input(37)
         if (self.estado_boton and not(self.estado_boton_anterior)):
-            self.publisher_boton.publish(True)
+            self.publisher_boton.publish(msg)
         if (GPIO.input(37)): self.estado_boton_anterior = True
         else: self.estado_boton_anterior = False
 
         #Manejo del sensor ultrasonico
         # Lanza pulso del trig
+        msg = Float32()
         GPIO.output(40,True)
         time.sleep(0.00001)
         GPIO.output(40,False)
@@ -67,11 +70,8 @@ class NodoRPi(Node):
         while (GPIO.input(38)): pulse_end = time.time()
         pulse_dur = pulse_end - pulse_start
         self.distancia_sensor = pulse_dur*34300/2
-
-        # Prints de output test 
-        self.get_logger().info(str(self.distancia_sensor))
-        self.estado_LED = not(self.estado_LED)
-        GPIO.output(11,self.estado_LED)
+        msg.data = self.distancia_sensor
+        self.publisher_proxomidad.publish(msg)
 
 def main(args=None) -> None:
     rclpy.init(args=args)
