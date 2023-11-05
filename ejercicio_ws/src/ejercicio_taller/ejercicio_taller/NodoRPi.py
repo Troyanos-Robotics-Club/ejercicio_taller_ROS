@@ -45,7 +45,7 @@ class NodoRPi(Node):
         accion = msg.data
         if accion.upper() == "ABRIR": self.pwm_servo(12.5)
         if accion.upper() == "CERRAR": self.pwm_servo(7.5)
-        if accion.upper() == "ABRE MUCHO": self.pwm_servo(2.5)
+        if accion.upper() == "ABRIR MUCHO": self.pwm_servo(2.5)
         self.sevo.ChangeDutyCycle(self.pwm_servo)
 
     def main_timer_callback(self): #publicar info de los sensores 

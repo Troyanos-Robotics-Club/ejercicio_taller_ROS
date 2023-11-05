@@ -2,33 +2,31 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32, Bool, String
+import time
 
 class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('node_name')
 
         # Create Publishers
-        self.publisher_servo = self.create_publisher(String,"/pwm_servo",self.callback_servo,10)
+        self.publisher_servo = self.create_publisher(String,"/pwm_servo",10)
 
         # Create Subscribers
         self.subscriber_boton = self.create_subscription(Bool,"/estado_boton",self.callback_boton,10)
 
-        # Initialize attributes
-
-        # Create timers
-        self.main_timer = self.create_timer(1,self.main_timer_callback)
-
-    # Create callback methods (subscribers and timers)
-    def main_timer_callback(self):
-        msg = String()
-        msg.data = "nice"
-        self.test_publisher.publish(msg)
+        # Inicializar servo
+        inicio = String()
+        inicio.data = "CERRAR"
+        self.publisher_servo.publish(inicio)
 
     def callback_boton(self,msg):
-        pass
-
-    def callback_servo(self,msg):
-        pass
+        msg_servo = String()
+        if (msg.data): # verificar presion de boton
+            msg_servo.data = "ABRIR"
+            self.publisher_servo.publish(msg_servo)
+            time.sleep(2)
+            msg_servo.data = "CERRAR"
+            self.publisher_servo.publish(msg_servo)
 
 def main(args=None) -> None:
     rclpy.init(args=args)
