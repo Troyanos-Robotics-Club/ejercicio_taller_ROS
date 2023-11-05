@@ -22,7 +22,7 @@ class NodoRPi(Node):
 
         # Create Subscribers
         self.subscriber_LED = self.create_subscription(Bool,"/estado_LED",self.callback_sub_LED,10)
-        self.subscriber_servo = self.create_subscription(Float32,"/pwm_servo", self.callback_sub_servo,10)
+        self.subscriber_servo = self.create_subscription(String,"/pwm_servo", self.callback_sub_servo,10)
 
         self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,10)
 
@@ -44,7 +44,10 @@ class NodoRPi(Node):
         GPIO.output(11,self.estado_LED)
 
     def callback_sub_servo(self, msg):
-        self.pwm_servo = msg.data
+        accion = msg.data
+        if accion.upper() == "ABRIR": self.pwm_servo(12.5)
+        if accion.upper() == "CERRAR": self.pwm_servo(7.5)
+        if accion.upper() == "ABRIR MUCHO": self.pwm_servo(2.5)
         self.sevo.ChangeDutyCycle(self.pwm_servo)
 
     def callback_sub_test(self,msg):
