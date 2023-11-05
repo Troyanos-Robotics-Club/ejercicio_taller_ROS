@@ -18,7 +18,7 @@ class Nodo1(Node):
         msg_test = String()
         self.index = not(self.index)
         msg_test.data = self.text[self.index]
-        self.publisher_test(msg_test)
+        self.publisher_test.publish(msg_test)
 
 def main(args=None) -> None:
     rclpy.init(args=args)
