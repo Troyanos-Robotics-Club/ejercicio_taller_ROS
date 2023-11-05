@@ -25,7 +25,9 @@ setup(
             "Nodo1 = ejercicio_taller.Nodo1:main",
             "Nodo2 = ejercicio_taller.Nodo2:main",
             "NodoHW_RPi = ejercicio_taller.NodoHW_RPi:main",
-            "NodoHW_VM = ejercicio_taller.NodoHW_VM:main"
+            "NodoHW_VM = ejercicio_taller.NodoHW_VM:main",
+            "my_first_publisher = ejercicio_taller.my_first_publisher:main",
+            "my_first_subscriber = ejercicio_taller.my_first_subscriber:main"
         ],
     },
 )
