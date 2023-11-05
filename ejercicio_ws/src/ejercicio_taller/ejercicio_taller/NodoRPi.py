@@ -36,7 +36,7 @@ class NodoRPi(Node):
         self.servo.start(self.pwm_servo)
 
         # Create timers
-        self.main_timer = self.create_timer(0.01, self.main_timer_callback)
+        self.main_timer = self.create_timer(0.1, self.main_timer_callback)
 
     # Create callback methods (subscribers and timers)
     def callback_sub_LED(self, msg):
@@ -68,6 +68,7 @@ class NodoRPi(Node):
         pulse_dur = pulse_end - pulse_start
         self.distancia_sensor = pulse_dur*34300/2
 
+        # Prints de output test 
         self.get_logger().info(str(self.distancia_sensor))
         self.estado_LED = not(self.estado_LED)
         GPIO.output(11,self.estado_LED)
