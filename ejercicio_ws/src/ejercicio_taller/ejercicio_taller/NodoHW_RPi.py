@@ -5,7 +5,7 @@ from std_msgs.msg import Float32, Bool, String
 
 class NodoRPi(Node):
     def __init__(self) -> None:
-        super().__init__('NodoHW-RPi')
+        super().__init__('NodoHW_RPi')
         self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,10)
 
     def callback_sub_test(self,msg):

@@ -5,7 +5,7 @@ import time
 
 class Nodo1(Node):
     def __init__(self) -> None:
-        super().__init__('NodoHW-VM')
+        super().__init__('NodoHW_VM')
 
         # Create Subscribers
         self.publisher_test = self.create_publisher(String,"/topic_test",10)
