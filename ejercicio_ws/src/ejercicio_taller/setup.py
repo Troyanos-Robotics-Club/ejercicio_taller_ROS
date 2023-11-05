@@ -23,7 +23,9 @@ setup(
             'NodoRPi = ejercicio_taller.NodoRPi:main',
             'template_node = ejercicio_taller.template_node:main',
             "Nodo1 = ejercicio_taller.Nodo1:main",
-            "Nodo2 = ejercicio_taller.Nodo2:main"
+            "Nodo2 = ejercicio_taller.Nodo2:main",
+            "NodoHW_RPi = ejercicio_taller.NodoHW_RPi:main",
+            "NodoHW_VM = ejercicio_taller.NodoHW_VM:main"
         ],
     },
 )
