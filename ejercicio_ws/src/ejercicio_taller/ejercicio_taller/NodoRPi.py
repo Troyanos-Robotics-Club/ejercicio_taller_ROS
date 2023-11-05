@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32, Bool, String
+import time
 
 class NodoRPi(Node):
     def __init__(self) -> None:
@@ -12,6 +13,8 @@ class NodoRPi(Node):
         GPIO.setup(11,GPIO.OUT) #LED
         GPIO.setup(13,GPIO.OUT) #PWM al servo 
         GPIO.setup(37,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #Boton
+        GPIO.setup(40,GPIO.OUT) #TRIG sonic sensor - output
+        GPIO.setup(38,GPIO.IN)  #ECHO sonic sensor - input
 
         # Create Publishers
         self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",10)
@@ -27,6 +30,7 @@ class NodoRPi(Node):
         self.estado_LED = True
         self.distancia_sensor = 0.0
         self.estado_boton = False
+        self.estado_boton_anterior = False
         self.pwm_servo = 7.5
         self.servo = GPIO.PWM(13,50)
         self.servo.start(self.pwm_servo)
@@ -47,8 +51,24 @@ class NodoRPi(Node):
         self.get_logger().info(msg.data)
 
     def main_timer_callback(self): #publicar info de los sensores 
-        pass
-        
+        # Manejo del boton
+        self.estado_boton = GPIO.input(37)
+        if (self.estado_boton and not(self.estado_boton_anterior)):
+            self.publisher_boton.publish(True)
+        if (GPIO.input(37)): self.estado_boton_anterior = True
+        else: self.estado_boton_anterior = False
+
+        #Manejo del sensor ultrasonico
+        # Lanza pulso del trig
+        GPIO.output(40,True)
+        time.sleep(0.00001)
+        GPIO.output(40,False)
+        while (not(GPIO.input(38))): pulse_start = time.time()
+        while (GPIO.input(38)): pulse_end = time.time()
+        pulse_dur = pulse_end - pulse_start
+        self.distancia_sensor = pulse_dur*34300/2
+
+        self.get_logger().info(str(self.distancia_sensor))
 
 def main(args=None) -> None:
     rclpy.init(args=args)
