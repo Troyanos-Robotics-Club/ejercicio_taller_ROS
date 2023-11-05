@@ -18,13 +18,11 @@ class NodoRPi(Node):
 
         # Create Publishers
         self.publisher_proxomidad = self.create_publisher(Float32, "/distancia_sensor",10)
-        self.publisher_boton = self.create_publisher(Bool, "/estado_boton",10)
+        self.publisher_boton = self.create_publisher(Bool, "/estado_boton",1)
 
         # Create Subscribers
         self.subscriber_LED = self.create_subscription(Bool,"/estado_LED",self.callback_sub_LED,10)
         self.subscriber_servo = self.create_subscription(String,"/pwm_servo", self.callback_sub_servo,10)
-
-        self.subscriber_test = self.create_subscription(String,"/topic_test",self.callback_sub_test,10)
 
         # Initialize attributes
         self.estado_LED = True
@@ -48,10 +46,7 @@ class NodoRPi(Node):
         if accion.upper() == "ABRIR": self.pwm_servo = 12.5
         if accion.upper() == "CERRAR": self.pwm_servo = 7.5
         if accion.upper() == "ABRIR MUCHO": self.pwm_servo = 2.5
-        self.sevo.ChangeDutyCycle(self.pwm_servo)
-
-    def callback_sub_test(self,msg):
-        self.get_logger().info(msg.data)
+        self.servo.ChangeDutyCycle(self.pwm_servo)
 
     def main_timer_callback(self): #publicar info de los sensores 
         # Manejo del boton
