@@ -1,8 +1,7 @@
 #import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
-
+from std_msgs.msg import Float32, Bool, String
 
 class NodeName(Node):
     def __init__(self) -> None:
@@ -16,10 +15,10 @@ class NodeName(Node):
         # Initialize attributes
 
         # Create timers
-        self.timer1 = self.create_timer(1,self.callback_timer)
+        self.main_timer = self.create_timer(1,self.main_timer_callback)
 
     # Create callback methods (subscribers and timers)
-    def callback_timer(self):
+    def main_timer_callback(self):
         msg = String()
         msg.data = "nice"
         self.test_publisher.publish(msg)
