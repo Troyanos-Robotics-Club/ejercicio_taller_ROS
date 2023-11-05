@@ -11,7 +11,7 @@ class NodeName(Node):
         self.publisher_servo = self.create_publisher(String,"/pwm_servo",self.callback_servo,10)
 
         # Create Subscribers
-        self.subscriber_boton = self.create_subscription(Boo,"/estado_boton",self.callback_boton,10)
+        self.subscriber_boton = self.create_subscription(Bool,"/estado_boton",self.callback_boton,10)
 
         # Initialize attributes
 
