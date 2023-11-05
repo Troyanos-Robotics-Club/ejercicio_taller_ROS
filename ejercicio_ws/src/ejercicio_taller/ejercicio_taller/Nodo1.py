@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+# Abre y cierra la puerta cada vez que se oprime el boton
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32, Bool, String
@@ -8,9 +8,10 @@ class NodeName(Node):
         super().__init__('node_name')
 
         # Create Publishers
-        self.test_publisher = self.create_publisher(String,"/topic_test",10)
+        self.publisher_servo = self.create_publisher(String,"/pwm_servo",self.callback_servo,10)
 
         # Create Subscribers
+        self.subscriber_boton = self.create_subscription(Boo,"/estado_boton",self.callback_boton,10)
 
         # Initialize attributes
 
@@ -22,6 +23,12 @@ class NodeName(Node):
         msg = String()
         msg.data = "nice"
         self.test_publisher.publish(msg)
+
+    def callback_boton(self,msg):
+        pass
+
+    def callback_servo(self,msg):
+        pass
 
 def main(args=None) -> None:
     rclpy.init(args=args)
