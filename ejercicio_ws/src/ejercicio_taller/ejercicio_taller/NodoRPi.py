@@ -36,7 +36,7 @@ class NodoRPi(Node):
         self.servo.start(self.pwm_servo)
 
         # Create timers
-        self.main_timer = self.create_timer(0.1, self.main_timer_callback)
+        self.main_timer = self.create_timer(0.001, self.main_timer_callback)
 
     # Create callback methods (subscribers and timers)
     def callback_sub_LED(self, msg):
