@@ -14,7 +14,7 @@ class Nodo1(Node):
 
         self.timer = self.create_timer(0.5,self.callback_test)
 
-    def callback_test(self,msg):
+    def callback_test(self):
         msg_test = String()
         self.index = not(self.index)
         msg_test.data = self.text[self.index]
